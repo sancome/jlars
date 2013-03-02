@@ -14,7 +14,7 @@ start_service() {
 	config_get buffer "$section" buffer
 	config_get_bool "enabled" "$section" "enabled" '1'
 
-	[ "$enabled" -gt 0 ] && $PROG -a $apname -b $buffer -d
+	[ "$enabled" -gt 0 ] && $PROG -a "$apname" -b $buffer -d
 }
 
 start() {
