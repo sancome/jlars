@@ -1,0 +1,4 @@
+config 'shairport'
+	option apname 'ShairPlay'
+	option buffer '300'
+	option enabled '1'

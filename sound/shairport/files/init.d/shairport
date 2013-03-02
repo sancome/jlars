@@ -1,0 +1,28 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2008 OpenWrt.org
+START=69
+
+NAME=shairport
+PROG=/usr/bin/$NAME
+
+start_service() {
+	local section="$1"
+	local apname
+	local buffer
+
+	config_get apname "$section" apname
+	config_get buffer "$section" buffer
+	config_get_bool "enabled" "$section" "enabled" '1'
+
+	[ "$enabled" -gt 0 ] && $PROG -a $apname -b $buffer -d
+}
+
+start() {
+	config_load "shairport"
+	config_foreach start_service "shairport"
+}
+
+stop() {
+	killall avahi-publish-service
+	killall $NAME
+}
